@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Billing\PaymentGateway;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -24,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(PaymentGateway::class, function($app)
+        {
+           return new PaymentGateway('usd','PKR');
+        });
     }
 }

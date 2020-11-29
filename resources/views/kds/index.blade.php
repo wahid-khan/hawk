@@ -47,6 +47,7 @@ body {
 </style>
 </head>
 <body>
+	@include('layouts.app')
 <div class="container">
 	<div class="row row-no-gutters bg-info">
 		<div class="col-sm-3">
