@@ -36,3 +36,7 @@ Route::get('/dashboard', 'DashboardController@index');
 
 
 Route::get('/pay', 'PayOrderController@store');
+
+Route::get('/channel', 'ChannelController@index');
+
+Route::get('/channel/create', 'ChannelController@create');
