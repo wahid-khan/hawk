@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Billing\PaymentGateway;
+
+use App\Orders\OrderDetails;
 use Illuminate\Http\Request;
+use App\billing\PaymentGatewayContract;
 
 class PayOrderController extends Controller
 {
     // public function store() if i dont define objects i.e i have to define in a functiion
     //AND note that I have 2 currencies
 
-    public function store(PaymentGateway $paymentGateway)
+    public function store(PaymentGatewayContract $paymentGatewayContract, OrderDetails $orderDetails)
     {
-        //$paymentGateway = new PaymentGateway('usd', 'PKR'); this is loong method i.e define in store function
+        // $bankpaymentGateway = new BankPaymentGateway('usd','PKR');
 
+        $order = $orderDetails->all();
 
-        dd($paymentGateway->charge('2500'));
+        dd($paymentGatewayContract->charge('2500'));
     }
 }

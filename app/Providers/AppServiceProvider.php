@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use App\Billing\PaymentGateway;
-use Illuminate\Support\ServiceProvider;
+use App\billing\BankPaymentGateway;
+use App\billing\CreditPaymentGateway;
 use Illuminate\Support\Facades\Schema;
+use App\billing\PaymentGatewayContract;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,9 +27,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(PaymentGateway::class, function($app)
+        $this->app->singleton(PaymentGatewayContract::class, function($app)
         {
-           return new PaymentGateway('usd','PKR');
+            if(request()->has('credit')){
+                return new CreditPaymentGateway('USD');     
+            }
+
+            return new BankPaymentGateway('USD');
         });
     }
 }
