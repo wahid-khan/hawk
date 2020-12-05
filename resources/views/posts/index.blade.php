@@ -2,9 +2,11 @@
 
 @section('content')
     <h1><a href="/hawk/public/posts">POSTS</a></h1>
-    <div class="element-box" style="max-width:88vw;overflow-x:auto;">
-        <a href="/hawk/public/posts/create" class="btn btn-primary">Add New Post</a><hr>
-    </div>
+    @if (!Auth::guest())
+        <div class="element-box" style="max-width:88vw;overflow-x:auto;">
+            <a href="/hawk/public/posts/create" class="btn btn-primary">Add New Post</a><hr>
+        </div>
+    @endif
         @if(count($posts) > 0)
             @foreach ($posts as $post)
                 <div class="well">
