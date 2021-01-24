@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+use App\Channel;
 use DB;
 class DashboardController extends Controller
 {
@@ -78,10 +79,22 @@ class DashboardController extends Controller
         // $users = DB::table('users')->pluck('name', 'id');
         // dd($posts, $users);
 
+        /*
+        # Chunking Results from DB
+        # is this how i updated the records
+        */
+        // DB::table('channels')->chunkById(100, function ($users) {
+        //     foreach ($users as $user) {
+        //         DB::table('channels')
+        //             ->where('id', $user->id)
+        //             ->update(['created_at' => '2020-12-06']);
+        //     }
+        // });
+
         // $users = DB::table('users')->paginate(15);
         //return auth()->user()->id;
         //return view('/dashboard')->with('users' , $user->posts);
-        return view('/dashboard')->with('posts', $user->posts()->paginate(5));
+         return view('/dashboard')->with('posts', $user->posts()->paginate(5));
         //return auth()->user()->id;
         
         
